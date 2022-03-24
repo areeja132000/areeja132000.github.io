@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1"
+  <title></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <section class="calculator">
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
+          </ul>
+      </div>
+      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+  </section>
+  <section class="instructions">
+    <h1>Perform Gaussian Elimination with row pivoting</h1>
+    <p>Please enter the numbers corresponding to your system of equations</p>
+  </section>
+  <section class="calculator">
+     <table id="calc">
+      <thead>
+        <tr>
+          <th><input type="number" id="n1" /></th>
+          <th><input type="number" id="n2" /></th>
+          <th><input type="number" id="n3" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="number" id="n4" /></td>
+          <td><input type="number" id="n5" /></td>
+          <td><input type="number" id="n6" /></td>
+        </tr>
+        <tr>
+          <td><input type="number" id="n7" /></td>
+          <td><input type="number" id="n8" /></td>
+          <td><input type="number" id="n9" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="submission">
+    <button class="button" onclick="submit()">
+      <p>Calculate</p>
+    </button>
+  </section>
+  <section class="results" id="results">
+    <table id="calc1">
+      <thead>
+        <tr>
+          <td id="n11"></td>
+          <td id="n22"></td>
+          <td id="n33"></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="n44"></td>
+          <td id="n55"></td>
+          <td id="n66"></td>
+        </tr>
+        <tr>
+          <td id="n77"></td>
+          <td id="n88"></td>
+          <td id="n99"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table id="calc1">
+      <thead>
+        <tr>
+          <td id="n111"></td>
+          <td id="n222"></td>
+          <td id="n333"></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="n444"></td>
+          <td id="n555"></td>
+          <td id="n666"></td>
+        </tr>
+        <tr>
+          <td id="n777"></td>
+          <td id="n888"></td>
+          <td id="n999"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table id="calc1">
+      <thead>
+        <tr>
+          <td id="n1111"></td>
+          <td id="n2222"></td>
+          <td id="n3333"></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="n4444"></td>
+          <td id="n5555"></td>
+          <td id="n6666"></td>
+        </tr>
+        <tr>
+          <td id="n7777"></td>
+          <td id="n8888"></td>
+          <td id="n9999"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table id="calc1">
+      <thead>
+        <tr>
+          <td id="n11111"></td>
+          <td id="n22222"></td>
+          <td id="n33333"></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="n44444"></td>
+          <td id="n55555"></td>
+          <td id="n66666"></td>
+        </tr>
+        <tr>
+          <td id="n77777"></td>
+          <td id="n88888"></td>
+          <td id="n99999"></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+<script>
+
+  var navLinks = document.getElementById("navLinks");
+  
+  function showMenu(){
+    navLinks.style.right = "0";
+  }
+  function hideMenu(){
+    navLinks.style.right = "-200px";
+  }
+  
+  function submit(){
+    var num1 = document.getElementById("n1").value;
+    var num2 = parseFloat(document.getElementById("n2").value);
+    var num3 = parseFloat(document.getElementById("n3").value);
+    var num4 = parseFloat(document.getElementById("n4").value);
+    var num5 = parseFloat(document.getElementById("n5").value);
+    var num6 = parseFloat(document.getElementById("n6").value);
+    var num7 = parseFloat(document.getElementById("n7").value);
+    var num8 = parseFloat(document.getElementById("n8").value);
+    var num9 = parseFloat(document.getElementById("n9").value);
+    
+    var biggest=0;
+    
+    if (num1 > num4){
+      biggest=num1;
+    } else {
+      biggest=num4;
+    }
+    if (num7 > biggest){
+      biggest=num7;
+    }
+    
+    if (biggest==num4){
+      var temp=num1;
+      num1=num4;
+      num4=temp;
+      temp=num2;
+      num2=num5;
+      num5=temp;
+      temp=num3;
+      num3=num6;
+      num6=temp;
+    
+    }
+    
+    if (biggest=num7){
+      var temp=num1;
+      num1=num7;
+      num7=temp;
+      temp=num2;
+      num2=num8;
+      num8=temp;
+      temp=num3;
+      num3=num9;
+      num9=temp;
+    }
+    
+    document.getElementById("n11").innerHTML = num1;
+    document.getElementById("n22").innerHTML = num2;
+    document.getElementById("n33").innerHTML = num3;
+    document.getElementById("n44").innerHTML = num4;
+    document.getElementById("n55").innerHTML = num5;
+    document.getElementById("n66").innerHTML = num6;
+    document.getElementById("n77").innerHTML = num7;
+    document.getElementById("n88").innerHTML = num8;
+    document.getElementById("n99").innerHTML = num9;
+
+    var multiplier1=(-1*num4)/num1;
+    num4 = 0;
+    num5 = (multiplier1)*num2+num5;
+    num6 = (multiplier1)*num3+num6;
+    var multiplier2=(-1*num7)/num1;
+    num7 = 0;
+    num8 = (multiplier2)*num2+num8;
+    num9 = (multiplier2)*num3+num9;
+
+    document.getElementById("n111").innerHTML = num1;
+    document.getElementById("n222").innerHTML = num2;
+    document.getElementById("n333").innerHTML = num3;
+    document.getElementById("n444").innerHTML = num4;
+    document.getElementById("n555").innerHTML = num5;
+    document.getElementById("n666").innerHTML = num6;
+    document.getElementById("n777").innerHTML = num7;
+    document.getElementById("n888").innerHTML = num8;
+    document.getElementById("n999").innerHTML = num9;
+    
+    if (num5 > num8){
+      biggest=num5;
+    } else {
+      biggest=num8;
+    }
+    
+    if (biggest=num8){
+      var temp=num8;
+      num8=num5;
+      num5=temp;
+      temp=num9;
+      num9=num6;
+      num6=temp;
+    }
+    
+    document.getElementById("n1111").innerHTML = num1;
+    document.getElementById("n2222").innerHTML = num2;
+    document.getElementById("n3333").innerHTML = num3;
+    document.getElementById("n4444").innerHTML = num4;
+    document.getElementById("n5555").innerHTML = num5;
+    document.getElementById("n6666").innerHTML = num6;
+    document.getElementById("n7777").innerHTML = num7;
+    document.getElementById("n8888").innerHTML = num8;
+    document.getElementById("n9999").innerHTML = num9;
+    
+    var multiplier3=(-1*num8)/num5;
+    num8 = 0;
+    num9 = (multiplier3)*num6+num9;
+    
+    document.getElementById("n11111").innerHTML = num1;
+    document.getElementById("n22222").innerHTML = num2;
+    document.getElementById("n33333").innerHTML = num3;
+    document.getElementById("n44444").innerHTML = num4;
+    document.getElementById("n55555").innerHTML = num5;
+    document.getElementById("n66666").innerHTML = num6;
+    document.getElementById("n77777").innerHTML = num7;
+    document.getElementById("n88888").innerHTML = num8;
+    document.getElementById("n99999").innerHTML = num9;
+    
+    document.getElementById("results").style.display = "block";
+  }
+  
+
+</script>
+</body>
+</html>
