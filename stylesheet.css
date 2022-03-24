@@ -125,15 +125,8 @@ nav .fa-solid{
   }
   
   .instructions{
-    margin: 50px 50px;
+    margin: 50px 50px 25px 50px;
     text-align: center;
-  }
-  
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    margin-left: auto; 
-    margin-right: auto;
   }
   
   .submission{
@@ -157,7 +150,21 @@ nav .fa-solid{
   }
   
   .results{
-    margin: 50px 50px;
     text-align: center;
     display: none;
+  }
+  
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 17%;
+    text-align: center;
+  }
+  
+  input[type="number"] {
+    width:60px;
   }
