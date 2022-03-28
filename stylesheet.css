@@ -49,7 +49,7 @@ nav{
   width: 90%;
   color: #ffffff;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -98,7 +98,7 @@ nav .fa-solid{
 }
 
   .sub-header{
-    height: 50vh;
+    height: 25vh;
     width: 100%;
     background-image: linear-gradient(rgba(9,25,51,0),rgba(255,255,255,0)),url(images/nav_img.jpg);
     background-size: cover;
