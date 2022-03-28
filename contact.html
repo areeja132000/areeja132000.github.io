@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="stylesheet.css">
   <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body onload="setBar()">
   <section class="sub-header">
     <nav>
       <div class="nav-links" id="navLinks">
@@ -35,12 +35,18 @@
   </section>
 <script>
 
-  var navLinks = document.getElementById("navLinks");
+  function setBar(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "-200px";
+  }
   
   function showMenu(){
-    navLinks.style.right = "0";
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "0px";
   }
+  
   function hideMenu(){
+    var navLinks = document.getElementById("navLinks");
     navLinks.style.right = "-200px";
   }
   
