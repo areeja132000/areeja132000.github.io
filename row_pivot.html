@@ -126,14 +126,27 @@
       var row = [];
       for(var a=0; a<n; a++) { /*column*/
         string = "n_" + x + a;
-        console.log(string);
-        row[a] = parseFloat(document.getElementById(string).value);
+        row[a] = parseFloat(document.getElementById(string).value) || 0;
       }
       matrix[x] = row;
     }
     
+    var inf = 0;
     for (var x=0;x<n-1;x++){
+      console.log(matrix[x][x]);
+      if (matrix[x][x]==0){
+        inf=1;
+        break;
+      }
       find_biggest_row_create_tables(x, n, matrix)
+    }
+    
+    if (inf==1 || matrix[n-1][n-1]==0){
+      console.log("There are inf many solutions.")
+      const div = document.getElementById('results');
+      var p = document.createElement('p');
+      p.innerHTML="There are infinitely many solutions.";
+      div.appendChild(p); 
     }
     
     document.getElementById("results").style.display = "block";
