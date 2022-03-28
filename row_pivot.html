@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="stylesheet.css">
   <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
 </head>
-<body onload="setBar()">
+<body>
   <section class="calculator">
     <nav>
       <div class="nav-links" id="navLinks">
@@ -59,11 +59,7 @@
 
   </section>
 <script>
-  function setBar(){
-    var navLinks = document.getElementById("navLinks");
-    navLinks.style.right = "-200px";
-  }
-  
+
   function showMenu(){
     var navLinks = document.getElementById("navLinks");
     navLinks.style.right = "0px";
