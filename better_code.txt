@@ -1,0 +1,52 @@
+   /*var matrix = [];
+    for(var row=0; row<3; row++){
+      var inner = [];
+      for(var column=0; column<3; column++){ 
+        var id = "n_"+row+column;
+        inner[column] = parseFloat(document.getElementById(id).value);
+      }
+      matrix[row]=inner;
+    }*/
+    
+    for (var l=0; l<3; l++){
+      var biggest=0;
+      var biggest_row;
+      for (var c=l; c<3; c++){ /*corresponds to row*/
+        if (matrix[c][l]>biggest){
+          biggest = matrix[c][l]
+          biggest_row = c;
+        }
+      }
+      temp = matrix[l];
+      matrix[l] = matrix[biggest_row];
+      matrix[biggest_row] = temp;
+      
+      var toAdd = document.createDocumentFragment();
+      var newDiv = document.createElement('table');
+      newDiv.id = l+'n';
+      for(var i=0; i < 3; i++){
+        var row = newDiv.insertRow(i);
+        var cell1 = row.insertCell(0);
+        cell1.id=l+'n_'+i+0;
+        var cell2 = row.insertCell(1);
+        cell2.id=l+'n_'+i+1;
+        var cell3 = row.insertCell(2);
+        cell3.id=l+'n_'+i+2;
+      }
+      toAdd.appendChild(newDiv);
+      document.appendChild(toAdd);
+      
+      for(var row=0; row<3; row++){
+        for(var column=0; column<3; column++){ 
+          var id = l+"n_"+row+column;
+          document.getElementById(id).innerHTML = matrix[row][column];
+        }
+      }
+      
+      for (var c=l+1; c<3; c++){ /*corresponds to row*/
+        multiplier = -1*(matrix[c][l])/(matrix[l][l]);
+        for(var x=l+1; x<3; x++) {
+          matrix[c][x]=multiplier*matrix[l][x]+matrix[c][x]
+        }
+      }
+    }
