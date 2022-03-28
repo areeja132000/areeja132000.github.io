@@ -77,12 +77,12 @@ nav .fa-solid{
     display: block;
   }
   .nav-links{
+    right: -200px;
     position: absolute;
     background: #000000;
     height: 100vh;
     width: 200px;
     top: 0px;
-    right: -200px;
     text-align: left;
     z-index: 2;
     transition: 1s;
