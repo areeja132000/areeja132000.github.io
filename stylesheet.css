@@ -81,7 +81,7 @@ nav .fa-solid{
     background: #000000;
     height: 100vh;
     width: 200px;
-    top: 0;
+    top: 0px;
     right: -200px;
     text-align: left;
     z-index: 2;
