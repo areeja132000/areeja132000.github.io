@@ -27,8 +27,9 @@
     <h1>Perform Gaussian Elimination with row pivoting</h1>
     <p>Please enter the numbers corresponding to your system of equations</p>
   </section>
-  <section class="calculator">
-     <table id="calc">
+  <section class="gauss_calc">
+    <p>A = </p>
+    <table id="calc" class="calc">
       <thead>
         <tr>
           <th><input type="number" id="n_00" /></th>
@@ -46,6 +47,22 @@
           <td><input type="number" id="n_20" /></td>
           <td><input type="number" id="n_21" /></td>
           <td><input type="number" id="n_22" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>b = </p>
+    <table id="b" class="b">
+      <thead>
+        <tr>
+          <th><input type="number" id="b_0" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="number" id="b_1" /></td>
+        </tr>
+        <tr>
+          <td><input type="number" id="b_2" /></td>
         </tr>
       </tbody>
     </table>
@@ -70,12 +87,24 @@
     navLinks.style.right = "-200px";
   }
  
-  function create_table(matrix){
+  function create_1d_table(matrix, n){
     const div = document.getElementById('results');
     var tbl = document.createElement('table');
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < n; i++) {
       const tr = tbl.insertRow();
-      for (let j = 0; j < 3; j++) {
+      const td = tr.insertCell();
+      td.appendChild(document.createTextNode(matrix[i]));
+    }
+    div.appendChild(tbl); 
+  }
+  
+  function create_2d_table(matrix, n, m){
+    const div = document.getElementById('results');
+    var tbl = document.createElement('table');
+    for (let i = 0; i < n; i++) {
+      const tr = tbl.insertRow();
+      for (let j = 0; j < m; j++) {
+      console.log(j);
         const td = tr.insertCell();
         td.appendChild(document.createTextNode(matrix[i][j]));
       }
@@ -83,7 +112,7 @@
     div.appendChild(tbl); 
   }
   
-  function find_biggest_row_create_tables(column, n, matrix){
+  function find_biggest_row_create_tables(column, n, matrix, b){
   
     var biggest=matrix[column][column];
     var biggest_row = column;
@@ -98,22 +127,27 @@
     temp = matrix[column];
     matrix[column] = matrix[biggest_row];
     matrix[biggest_row] = temp;
+    /*b calcs*/
+    temp = b[column];
+    b[column] = b[biggest_row];
+    b[biggest_row] = temp;
     
     /*create table*/
-    create_table(matrix);
+    create_2d_table(matrix, n, n);
     
     /*row reduction*/
     for (var row=column+1;row<n; row++){
       var multiplier=(-1*matrix[row][column])/matrix[column][column];
-      console.log("column: "+ column + " multiplier: " + multiplier);
+      /*b calcs*/
+      b[row]=(multiplier)*b[column]+b[row]
+      
       for (var current_col=column;current_col<n; current_col++){
-        console.log((multiplier)*matrix[column][current_col]+matrix[row][current_col]);
         matrix[row][current_col]= (multiplier)*matrix[column][current_col]+matrix[row][current_col];
       }
     }
     
     /*create table*/
-    create_table(matrix);
+    create_2d_table(matrix, n, n);
     
   }
   
@@ -122,6 +156,7 @@
     n=3;
     
     var matrix = [];
+    var b = [];
     for(var x=0; x<n; x++) { /*row*/
       var row = [];
       for(var a=0; a<n; a++) { /*column*/
@@ -131,22 +166,40 @@
       matrix[x] = row;
     }
     
+    for(var x=0; x<n; x++) { /*row*/
+      string = "b_" + x;
+      b[x] = parseFloat(document.getElementById(string).value) || 0;
+    }
+    
     var inf = 0;
     for (var x=0;x<n-1;x++){
-      console.log(matrix[x][x]);
       if (matrix[x][x]==0){
         inf=1;
         break;
       }
-      find_biggest_row_create_tables(x, n, matrix)
+      find_biggest_row_create_tables(x, n, matrix, b)
     }
     
     if (inf==1 || matrix[n-1][n-1]==0){
-      console.log("There are inf many solutions.")
       const div = document.getElementById('results');
       var p = document.createElement('p');
       p.innerHTML="There are infinitely many solutions.";
       div.appendChild(p); 
+    } else {
+      var x = [];
+      for (var m=n-1; m>=0; m--){
+        var num = b[m];
+        for (l=n-1;l>m;l--){
+          num=num-matrix[m][l]*x[l];
+        }
+        x[m] = num/matrix[m][m];
+      }
+      const div = document.getElementById('results');
+      var p = document.createElement('p');
+      p.innerHTML="Answer x = ";
+      div.appendChild(p); 
+      
+      create_1d_table(x, n);
     }
     
     document.getElementById("results").style.display = "block";
