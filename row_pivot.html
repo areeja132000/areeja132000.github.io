@@ -93,7 +93,7 @@
     for (let i = 0; i < n; i++) {
       const tr = tbl.insertRow();
       const td = tr.insertCell();
-      td.appendChild(document.createTextNode(matrix[i]));
+      td.appendChild(document.createTextNode(Math.round(matrix[i]*100)/100));
     }
     div.appendChild(tbl); 
   }
@@ -106,13 +106,15 @@
       for (let j = 0; j < m; j++) {
       console.log(j);
         const td = tr.insertCell();
-        td.appendChild(document.createTextNode(matrix[i][j]));
+        td.appendChild(document.createTextNode(Math.round(matrix[i][j]*100)/100));
       }
     }
     div.appendChild(tbl); 
   }
   
   function find_biggest_row_create_tables(column, n, matrix, b){
+  
+    var two_matrices = [];
   
     var biggest=matrix[column][column];
     var biggest_row = column;
@@ -149,6 +151,9 @@
     /*create table*/
     create_2d_table(matrix, n, n);
     
+    two_matrices[0]= matrix;
+    two_matrices[1]= b;
+    return two_matrices;
   }
   
   function submit(){
@@ -177,7 +182,9 @@
         inf=1;
         break;
       }
-      find_biggest_row_create_tables(x, n, matrix, b)
+      var temp = find_biggest_row_create_tables(x, n, matrix, b);
+      matrix = temp[0];
+      b = temp[1];
     }
     
     if (inf==1 || matrix[n-1][n-1]==0){
