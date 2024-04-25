@@ -23,6 +23,27 @@
   position: relative; 
 }
 
+.header3{
+  min-height: 240vh;
+  background-color: black;
+  background-size: cover; 
+  background-position: center;
+  background-size: cover;
+  position: relative; 
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 nav{
   display: flex;
   padding: 0.25% 0.25%;
@@ -71,6 +92,22 @@ nav{
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+}
+
+.buffer_overflow{
+  width: 90%;
+  color: #ffffff;
+  position: absolute;
+  top: 3%;
+  left: 2%;
+}
+
+.buffer_overflow h1{
+  margin: 20px;
+}
+
+.buffer_overflow p{
+  margin: 20px;
 }
 
 .text-box h1{
