@@ -78,6 +78,124 @@ nav .fa-solid{
   display: none;
 }
 
+.sub-header{
+  height: 35vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(9,25,51,0),rgba(255,255,255,0)),url(images/nav_img.jpg);
+  background-size: cover;
+  color: #000000;
+}
+
+.about_us {
+  height: 25vh;
+  margin: 50px;
+  background-color: black;
+  text-align: center;
+}
+
+.about_us h1{
+  margin-bottom: 10px;
+  font-size: 30px;
+  color: white;
+}
+
+.about_us p{
+  color: white;
+}
+
+.gauss_calc p{
+  color: white;
+}
+
+.instructions h1{
+  color: white;
+}
+
+.instructions p{
+  color: white;
+}
+
+.wrapper{
+  margin: 10px;
+}
+.icon1{
+  display: inline-block;
+}
+.container{
+  display: inline-block;
+}
+
+.instructions{
+  margin: 50px 50px 25px 50px;
+  text-align: center;
+}
+
+.submission{
+  margin-top: 10px;
+  text-align: center;
+}
+
+.button{
+  text-align: center;
+  color: #ffffff;
+  background-color: rgb(96, 96, 96);
+  margin: 0px 0px 15px 0px;
+}
+
+.button p{
+  margin: 10px 10px;
+}
+
+.button:hover{
+  background-color: #A9A9A9;
+  transition: 0.5s;
+}
+
+.results{
+  text-align: center;
+  display: none;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-left: auto; 
+  margin-right: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 17%;
+  text-align: center;
+}
+
+input[type="number"] {
+  width:60px;
+}
+
+.gauss_calc{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calc{
+  margin: 10px;
+  padding: 20px;
+}
+
+.b{
+  width: 5%;
+  margin: 10px;
+  padding: 20px;
+}
+
+.footer {
+  padding-top: 10px;
+  background-color: black;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
 @media(max-width: 700px){
   .text-box h1{
     font-size: 20px;
@@ -105,122 +223,3 @@ nav .fa-solid{
     cursor: pointer;
   }
 }
-
-  .sub-header{
-    height: 35vh;
-    width: 100%;
-    background-image: linear-gradient(rgba(9,25,51,0),rgba(255,255,255,0)),url(images/nav_img.jpg);
-    background-size: cover;
-    color: #000000;
-  }
-  
-  .about_us {
-    height: 25vh;
-    margin: 50px;
-    background-color: black;
-    text-align: center;
-  }
-
-  .about_us h1{
-    margin-bottom: 10px;
-    font-size: 30px;
-    color: white;
-  }
-
-  .about_us p{
-    color: white;
-  }
-
-  .gauss_calc p{
-    color: white;
-  }
-
-  .instructions h1{
-    color: white;
-  }
-
-  .instructions p{
-    color: white;
-  }
-
-  .wrapper{
-    margin: 10px;
-  }
-  .icon1{
-    display: inline-block;
-  }
-  .container{
-    display: inline-block;
-  }
-  
-  .instructions{
-    margin: 50px 50px 25px 50px;
-    text-align: center;
-  }
-  
-  .submission{
-    margin-top: 10px;
-    text-align: center;
-  }
-  
-  .button{
-    text-align: center;
-    color: #ffffff;
-    background-color: rgb(96, 96, 96);
-    margin: 0px 0px 15px 0px;
-  }
-  
-  .button p{
-    margin: 10px 10px;
-  }
-  
-  .button:hover{
-    background-color: #A9A9A9;
-    transition: 0.5s;
-  }
-  
-  .results{
-    text-align: center;
-    display: none;
-  }
-  
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    margin-left: auto; 
-    margin-right: auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    width: 17%;
-    text-align: center;
-  }
-  
-  input[type="number"] {
-    width:60px;
-  }
-  
-  .gauss_calc{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .calc{
-    margin: 10px;
-    padding: 20px;
-  }
-  
-  .b{
-    width: 5%;
-    margin: 10px;
-    padding: 20px;
-  }
-
-  .footer {
-    padding-top: 10px;
-    background-color: black;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-  }
-
