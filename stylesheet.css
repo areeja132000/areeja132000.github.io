@@ -3,6 +3,7 @@
   padding: 0;
   font-family: 'Red Hat Mono', monospace;
 }
+
 .header{
   min-height: 100vh;
   width: 100%;
@@ -11,6 +12,7 @@
   background-size: cover;
   position: relative; 
 }
+
 .header2{
   min-height: 100vh;
   width: 100%;
@@ -20,6 +22,7 @@
   background-size: cover;
   position: relative; 
 }
+
 nav{
   display: flex;
   padding: 0.25% 0.25%;
@@ -27,21 +30,25 @@ nav{
   align-items: center;
   background-color: rgb(58, 58, 58);;
 }
+
 .nav-links{
   flex: 1;
   text-align: right;
 }
+
 .nav-links ul li{
   list-style: none;
   display: inline-block;
   padding: 15px 30px; /*0 is from top and bottom. 30 is b/w the links (from sides)*/
   position: relative;
 }
+
 .nav-links ul li a{
   color: #fff;
   text-decoration: none;
   font-size: 18px;
 }
+
 .nav-links ul li::after{
   content: '';
   width: 0%;
@@ -51,9 +58,11 @@ nav{
   margin: auto;
   transition: 0.5s;
 }
+
 .nav-links ul li:hover::after{
   width: 100%;
 }
+
 .text-box{
   width: 90%;
   color: #ffffff;
@@ -137,7 +146,6 @@ nav .fa-solid{
 
 .button{
   text-align: center;
-  color: #ffffff;
   background-color: rgb(96, 96, 96);
   margin: 0px 0px 15px 0px;
 }
