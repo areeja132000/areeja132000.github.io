@@ -10,70 +10,72 @@
   <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <section class="calculator">
-    <nav>
-      <div class="nav-links" id="navLinks">
-        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
-          <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
-            <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
-          </ul>
-      </div>
-      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
-    </nav>
-  </section>
-  <section class="instructions">
-    <h1>Perform Gaussian Elimination with row pivoting</h1>
-    <p>Please enter the numbers corresponding to your system of equations</p>
-  </section>
-  <section class="gauss_calc">
-    <p>A = </p>
-    <table id="calc" class="calc">
-      <thead>
-        <tr>
-          <th><input type="number" id="n_00" /></th>
-          <th><input type="number" id="n_01" /></th>
-          <th><input type="number" id="n_02" /></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="number" id="n_10" /></td>
-          <td><input type="number" id="n_11" /></td>
-          <td><input type="number" id="n_12" /></td>
-        </tr>
-        <tr>
-          <td><input type="number" id="n_20" /></td>
-          <td><input type="number" id="n_21" /></td>
-          <td><input type="number" id="n_22" /></td>
-        </tr>
-      </tbody>
-    </table>
-    <p>b = </p>
-    <table id="b" class="b">
-      <thead>
-        <tr>
-          <th><input type="number" id="b_0" /></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="number" id="b_1" /></td>
-        </tr>
-        <tr>
-          <td><input type="number" id="b_2" /></td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-  <section class="submission">
-    <button class="button" onclick="submit()">
-      <p>Calculate</p>
-    </button>
-  </section>
-  <section class="results" id="results">
-
+  <section class="header2">
+    <section class="calculator">
+      <nav>
+        <div class="nav-links" id="navLinks">
+          <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+            <ul>
+              <li><a href="index.html">HOME</a></li>
+              <li><a href="contact.html">CONTACT</a></li>
+              <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
+              <li><a href="ctf_index.html">CTF WALKTHROUGHS</a></li>
+            </ul>
+        </div>
+        <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+      </nav>
+    </section>
+    <section class="instructions">
+      <h1>Perform Gaussian Elimination with row pivoting</h1>
+      <p>Please enter the numbers corresponding to your system of equations</p>
+    </section>
+    <section class="gauss_calc">
+      <p>A = </p>
+      <table id="calc" class="calc">
+        <thead>
+          <tr>
+            <th><input type="number" id="n_00" /></th>
+            <th><input type="number" id="n_01" /></th>
+            <th><input type="number" id="n_02" /></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="number" id="n_10" /></td>
+            <td><input type="number" id="n_11" /></td>
+            <td><input type="number" id="n_12" /></td>
+          </tr>
+          <tr>
+            <td><input type="number" id="n_20" /></td>
+            <td><input type="number" id="n_21" /></td>
+            <td><input type="number" id="n_22" /></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>b = </p>
+      <table id="b" class="b">
+        <thead>
+          <tr>
+            <th><input type="number" id="b_0" /></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="number" id="b_1" /></td>
+          </tr>
+          <tr>
+            <td><input type="number" id="b_2" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="submission">
+      <button class="button" onclick="submit()">
+        <p>Calculate</p>
+      </button>
+    </section>
+    <section class="results" id="results"></section>
+    <section class="footer"></section>
   </section>
 <script>
 
@@ -90,6 +92,8 @@
   function create_1d_table(matrix, n){
     const div = document.getElementById('results');
     var tbl = document.createElement('table');
+    tbl.style.backgroundColor = 'white';
+    tbl.style.marginBottom = '50px';
     for (let i = 0; i < n; i++) {
       const tr = tbl.insertRow();
       const td = tr.insertCell();
@@ -101,6 +105,7 @@
   function create_2d_table(matrix, n, m){
     const div = document.getElementById('results');
     var tbl = document.createElement('table');
+    tbl.style.backgroundColor = 'white';
     for (let i = 0; i < n; i++) {
       const tr = tbl.insertRow();
       for (let j = 0; j < m; j++) {
@@ -190,7 +195,9 @@
     if (inf==1 || matrix[n-1][n-1]==0){
       const div = document.getElementById('results');
       var p = document.createElement('p');
+      p.style.color = 'white';
       p.innerHTML="There are infinitely many solutions or no solution.";
+      p.style.marginBottom = '50px';
       div.appendChild(p); 
     } else {
       var x = [];
@@ -203,6 +210,7 @@
       }
       const div = document.getElementById('results');
       var p = document.createElement('p');
+      p.style.color = 'white';
       p.innerHTML="Answer x = ";
       div.appendChild(p); 
       
