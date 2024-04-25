@@ -39,7 +39,7 @@ nav{
 .nav-links ul li{
   list-style: none;
   display: inline-block;
-  padding: 15px 30px; /*0 is from top and bottom. 30 is b/w the links (from sides)*/
+  padding: 10px 30px; /*0 is from top and bottom. 30 is b/w the links (from sides)*/
   position: relative;
 }
 
