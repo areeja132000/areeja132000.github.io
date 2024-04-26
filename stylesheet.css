@@ -82,6 +82,16 @@ nav{
   margin-top: 37%;
 }
 
+.strops_container{
+  background-color: #000000;
+  color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
 .lockbox_container{
   background-color: #000000;
   color: black;
@@ -96,12 +106,17 @@ nav{
   color: #ffffff;
   background-color: #000000;
   position: absolute;
-  top: 20%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .walkthroughs h1{
+  margin-bottom: 10px;
+}
+
+.walkthroughs h3{
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 

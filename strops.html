@@ -23,26 +23,15 @@
       </div>
       <i class="fa-solid fa-bars" onclick="showMenu()"></i>
     </nav>
-    <div class="walkthrough_container">
-      <div class="walkthroughs">
-        <h1>Walthroughs</h1>
+    <div class="strops_container">
+      <div class="writeup">
+        <h1>Simple reverse engineering - strops</h1>
+        <p>The associated binary and solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-1">binary and writeup</a>
         <p></p>
-        <h3>Reverse Engineering</h3>
-        <p></p>
-        <a href="strops.html">Simple reverse engineering - strops</a>
-        <p></p>
-        <a href="postage.html">Simple reverse engineering - postage</a>
-        <p></p>
-        <a href="numerix.html">Simple reverse engineering - numerix</a>
-        <p></p>
-        <a href="recurse.html">Simple reverse engineering - recurse</a>
-        <p></p>
-        <h3>Pwn</h3>
-        <p></p>
-        <a href="boffin.html">Simple buffer overflow - boffin</a>
-        <p></p>
-        <a href="lockbox.html">Simple buffer overflow with reverse engineering - lockbox</a>
-        
+        <p>I completed this challenge using static analysis. Since there is a tilde in front of the character of the flag in the disassembler, we can flip the bits of the hex numbers in the disassembler to find the ascii of the hex result</p>
+        <div class="center"><img src="images/strops.png"></div>
+        <section class="footer"></section>
       </div>
     </div>
   </section>
