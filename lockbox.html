@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CTF WALKTHROUGHS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:black;">
+  <section class="header2">
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="ctf_index.html">CTF WALKTHROUGHS</a></li>
+            <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+      </div>
+      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="lockbox_container">
+      <div class="writeup">
+        <h1>Buffer Overflow + Reverse Engineering - Lockbox</h1>
+        <p>I solved this challenge using static and dynamic analysis. For my solution to be effective, it's imperative that no canary is detected, as canaries would stop buffer overflow attacks. Furthermore, it is necessary that PIE (Position Independent Executable) is disabled, as an enabled PIE ensures that functions are not loaded into the same addresses each time, making it difficult to jump to different functions with a buffer overflow. I checked both requirements with checksec.</p>
+        <div class="center"><img src="images/lockbox_checksec.png" class="small"></div>
+        <p>If we examine the assembly, we can see that 0x40 bytes of space is allocated to the stack. We also know that there is a saved RBP 8 bytes long before this allocated space. So, we know that we must overwrite 0x48 bytes to get to the return address.</p>
+        <div class="center"><img src="images/lockbox_main.png"></div>
+        <p>We also know that we need to overwrite the return address with the address of the win function, since that will allow us to win.</p>
+        <div class="center"><img src="images/lockbox_win.png"></div>
+        <p>Now, if we look at the assembly, we can see that RBP-0x8 is a pointer to the third 8-byte item we send in through gets. We can also see that RBP-0x10 is a pointer to the fourth 8-byte item we send through gets. We also know that when we try to win (by jumping into the win function), we will need the key to be 0x00000000daddb0dd. Right now, the key is a different value. Furthermore, we know that, at the end of main, the program will overwrite the value that the third 8-byte item we send points to with the value of the fourth 8-byte item we send. Thus, we can send a pointer to the key as our third 8-byte item and 0x00000000daddb0dd as our fourth 8-byte item to get the flag. Thus, this challenge is solved. </p>
+        <div class="center"><img src="images/lockbox_code.png"></div>
+        <section class="footer"></section>
+      </div>
+    </div>
+  </section>
+<script>
+  
+  function showMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "0px";
+  }
+  
+  function hideMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "-200px";
+  }
+  
+
+</script>
+</body>
+</html>
