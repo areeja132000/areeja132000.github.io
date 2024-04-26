@@ -25,7 +25,10 @@
     </nav>
     <div class="boffin_container">
       <div class="writeup">
-        <h1>Buffer Overflow - Boffin</h1>
+        <h1>Buffer Overflow - boffin</h1>
+        <p>The associated binary and solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-4">binary and writeup</a>
+        <p></p>
         <p>I solved this challenge using static analysis. For my solution to be effective, it's imperative that no canary is detected, as canaries would stop buffer overflow attacks. Furthermore, it is necessary that PIE (Position Independent Executable) is disabled, as an enabled PIE ensures that functions are not loaded into the same addresses each time, making it difficult to jump to different functions with a buffer overflow. I checked both requirements with checksec.</p>
         <div class="center"><img src="images/boffin_checksec.png" class="small"></div>
         <p>If we examine main, we can see that a string of 32 bytes is allocated space on the stack. We also know that there is a saved RBP 8 bytes long before this allocated space.</p>

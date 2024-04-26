@@ -79,7 +79,7 @@ nav{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 35%;
+  margin-top: 37%;
 }
 
 .lockbox_container{
@@ -89,7 +89,7 @@ nav{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 50%;
+  margin-top: 53%;
 }
 
 .walkthrough_container{
@@ -116,6 +116,12 @@ nav{
 }
 
 .writeup h1{
+  margin: 20px 0px;
+  color: #ffffff;
+  background-color: #000000;
+}
+
+.writeup a{
   margin: 20px 0px;
   color: #ffffff;
   background-color: #000000;
