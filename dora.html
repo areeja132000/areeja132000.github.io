@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>BRIDGE OF DEATH</title>
+  <title>DORA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
@@ -25,14 +25,12 @@
     </nav>
     <div class="container">
       <div class="writeup">
-        <h1>Simple reverse engineering - bridge of death</h1>
+        <h1>Simple reverse engineering - dora</h1>
         <p>The associated binary and solution can be found in this repository:</p>
         <a href="https://github.com/areeja132000/offensive-security/tree/main/week-2">binary and writeup</a>
         <p></p>
-        <p>I completed this challenge using a combination of brute force and static analysis. The first question will not throw the user into the gorge regardless of what input is given, so nothing needs to be solved there. The second question asks for 2 numbers such that the second number == first number when it is manipulated through func2. I used brute force to initially explore what inputs would lead to what outputs. While exploring, I was able to brute force the answer. The script is below:</p>
-        <div class="center"><img src="images/bridge_of_death_code.png"></div>
-        <p>For the third question, for each number in [1,2,3…,9], the program asks for two inputs such that forestOfEwing[input2 + input1*256] == number. So, for each number in [1,2,3…,9], I found the number in the forestOfEwing array, calculated input1 by dividing its index in the array by 256, and calculated input2 by finding the remainder of its index divided by 256. By doing this, I was able to clear bridge of death. </p>
-        <div class="center"><img src="images/bridge_of_death_array.png"></div>
+        <p>I completed this challenge using brute force. If we look at the decompiler, we can see that the entered key needs to be between 0 and 255 (inclusive). So, we could just brute force all numbers from 0 to 255 to get the key. Please see the python solver script.</p>
+        <div class="center"><img src="images/dora_main.png"></div>
         <section class="footer"></section>
       </div>
     </div>
