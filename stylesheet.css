@@ -72,52 +72,23 @@ nav{
   text-align: center;
 }
 
-.boffin_container{
+.container{
   background-color: #000000;
   color: black;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin-top: 37%;
-}
-
-.strops_container{
-  background-color: #000000;
-  color: black;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-
-.lockbox_container{
-  background-color: #000000;
-  color: black;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin-top: 53%;
-}
-
-.walkthrough_container{
-  color: #ffffff;
-  background-color: #000000;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 20px;
+  margin-left: 400px;
+  width: 50%;
 }
 
 .walkthroughs h1{
-  margin-bottom: 10px;
+  margin: 20px 0px;
+  color: #ffffff;
 }
 
 .walkthroughs h3{
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 20px 0px 10px 0px;
+  color: #ffffff;
 }
 
 .walkthroughs a{
