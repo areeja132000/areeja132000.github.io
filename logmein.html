@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LOG ME IN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:black;">
+  <section class="header2">
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="ctf_index.html">CTF WALKTHROUGHS</a></li>
+            <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+      </div>
+      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="container">
+      <div class="writeup">
+        <h1>SQL Injection - log me in</h1>
+        <p>A PDF of the solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-9">PDF of solution</a>
+        <p></p>
+        <p>For this challenge, I first explored the website a little. The website looked like this:</p>
+        <div class="center"><img src="images/logmein_website.png"></div>
+        <p>After that, I used Burp Suite to bypass the necessity of including “@” and excluding spaces from my username. I figured out that I needed to enter a malicious payload as the email address because entering a single quote as the email address gave me a 500 response but entering a single quote as the password did not. Below is the request that sends a single apostrophe as the input for the username and the associated response:</p>
+        <div class="center"><img src="images/proof_SQL_injection_vulnerability_1.png"></div>
+        <div class="center"><img src="images/proof_SQL_injection_vulnerability_2.png"></div>
+        <p>Some of my failed attempts to get the flag include (as the input for email address):</p>
+        <p>“admin'--@hi” ==> http 500</p>
+        <p>“'1=1--@hi” ==> http 500</p>          
+        <p>The correct input to get the flag:</p>
+        <p>“admin' – ” ==> flag</p>
+        <p>I edited the intercepted burp suite request to be the following to get the flag:</p>
+        <div class="center"><img src="images/logmein_solution.png"></div>
+        <div class="center"><img src="images/logmein_solution_proof.png"></div>
+        <p>Through this, I was able to get the flag.</p>
+      </div>
+    </div>
+  </section>
+<script>
+  
+  function showMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "0px";
+  }
+  
+  function hideMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "-200px";
+  }
+  
+
+</script>
+</body>
+</html>

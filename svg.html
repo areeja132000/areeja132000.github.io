@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>CTF WALKTHROUGHS</title>
+  <title>SVG TEXT EXTRACTOR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
@@ -24,34 +24,18 @@
       <i class="fa-solid fa-bars" onclick="showMenu()"></i>
     </nav>
     <div class="container">
-      <div class="walkthroughs">
-        <h1>Walthroughs</h1>
+      <div class="writeup">
+        <h1>XXE vulnerability - SVG text extractor</h1>
+        <p>A PDF of the solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-9">PDF of solution</a>
         <p></p>
-        <h3>Reverse Engineering</h3>
-        <p></p>
-        <a href="strops.html">Simple reverse engineering - strops</a>
-        <p></p>
-        <a href="postage.html">Simple reverse engineering - postage</a>
-        <p></p>
-        <a href="numerix.html">Simple reverse engineering - numerix</a>
-        <p></p>
-        <a href="recurse.html">Simple reverse engineering - recurse</a>
-        <p></p>
-        <a href="bridge_of_death.html">Simple reverse engineering - bridge of death</a>
-        <p></p>
-        <a href="dora.html">Simple reverse engineering - dora</a>
-        <p></p>
-        <h3>Pwn</h3>
-        <p></p>
-        <a href="boffin.html">Simple buffer overflow - boffin</a>
-        <p></p>
-        <a href="lockbox.html">Simple buffer overflow with reverse engineering - lockbox</a>
-        <p></p>
-        <h3>Web</h3>
-        <p></p>
-        <a href="logmein.html">SQL Injection - log me in</a>
-        <p></p>
-        <a href="svg.html">XXE vulnerability - SVG text extractor</a>
+        <p>For this challenge, I first explored the website a little.</p>
+        <div class="center"><img src="images/svg_website.png"></div>
+        <p>I searched up SVG text and obtained the following code:</p>
+        <div class="center"><img src="images/svg_code.png"></div>
+        <p>Clearly, SVG files use XML. Therefore, we can try an XXE attack. I changed the above code to be the following:</p>
+        <div class="center"><img src="images/XXE_attack.png"></div>
+        <p>Through this, I was able to get the flag.</p>
       </div>
     </div>
   </section>
