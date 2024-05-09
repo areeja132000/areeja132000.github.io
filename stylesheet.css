@@ -81,6 +81,7 @@ nav{
   margin-top: 20px;
   margin-left: 400px;
   width: 50%;
+  overflow-x: visible;
 }
 
 .walkthroughs h1{

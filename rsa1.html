@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RSA1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:black;">
+  <section class="header2">
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="ctf_index.html">CTF WALKTHROUGHS</a></li>
+            <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+      </div>
+      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="container">
+      <div class="writeup">
+        <h1>Small exponent - rsa1</h1>
+        <p>The associated script, ciphertext, and PDF of the solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-12">Script, ciphertext, and PDF</a>
+        <p>For this challenge, we can see that m^e is probably < N. This means m^e mod n is just m^e. Therefore, we can rearrange for m to find the plaintext.</p>
+        <p>m^e = c<br><=> c^(1/e) = m</p>
+        <p>Now, if we convert the integer m we get back to ascii, we get the flag. These are the results when I run my python script:</p>
+        <div class="center"><img src="images/rsa1_script_results.png"></div>
+        <p>Thus, this challenge is solved.</p>
+      </div>
+    </div>
+  </section>
+<script>
+  
+  function showMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "0px";
+  }
+  
+  function hideMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "-200px";
+  }
+  
+
+</script>
+</body>
+</html>

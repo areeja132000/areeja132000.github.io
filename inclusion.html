@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>INCLUSION</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:black;">
+  <section class="header2">
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="ctf_index.html">CTF WALKTHROUGHS</a></li>
+            <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+      </div>
+      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="container">
+      <div class="writeup">
+        <h1>PHP file inclusion vulnerability - Inclusion</h1>
+        <p>A PDF of the solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-10">PDF of solution</a>
+        <p></p>
+        <p>For this challenge, I used Burp Suite to try to exploit a PHP file inclusion vulnerability. If we look around the website, on the flag page, we can see "The flag is just above this line (in the source code at least)!". </p>
+        <div class="center"><img src="images/inclusion_website.png"></div>
+        <p>Thus, we can conclude that we need to leak some source code. Furthermore, from the name of this challenge, we can conclude that the source code contains a PHP file inclusion vulnerability. When looking at burp suite, we can also see that there is a “page=flag”.</p>
+        <div class="center"><img src="images/inclusion_observation.png"></div>
+        <p>Include supports PHP stream filter URLs. Thus, we can change “page=flag” to “page=php://filter/convert.base64-encode/resource=flag” to get a base64 encoding of the flag.</p>
+        <div class="center"><img src="images/inclusion_leak.png"></div>
+        <p>Then, once we decode the outputted string, we get the flag (in this case, it is “flag{php_1nclud3_1s_s0_w31rd}”). Thus, the challenge is solved.</p>
+      </div>
+    </div>
+  </section>
+<script>
+  
+  function showMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "0px";
+  }
+  
+  function hideMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "-200px";
+  }
+  
+
+</script>
+</body>
+</html>

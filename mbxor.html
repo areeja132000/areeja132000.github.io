@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MBXOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:black;">
+  <section class="header2">
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="ctf_index.html">CTF WALKTHROUGHS</a></li>
+            <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+      </div>
+      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="container">
+      <div class="writeup">
+        <h1>Multi byte XOR - mbxor</h1>
+        <p>The associated scripts, ciphertext, and PDF of the solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-11">Scripts, ciphertext, and PDF</a>
+        <p>For this challenge, I inferred from the name that this is a multi byte xor challenge. To complete this
+          challenge, I figured out the most likely key length by splitting up the encrypted text into n-length
+          chunks. Now, for adjacent chunks, I XOR’ed the bytes at corresponding indices with each other
+          (XOR’ed byte at index 0 of chunk 0 with byte at index 0 of chunk 1, etc…). If I XOR these bytes, then
+          the resulting number will have 1’s corresponding to the unmatching bits between these two bytes.
+          If I add these unmatching bits and divide by number of bytes compared, then I should get an
+          average number of unmatching bits per byte. Due to the way multi-byte XOR works, if my key length
+          is correct, then the average number of unmatching bits per byte will be lowest when I have the
+          correct key length. I created a python script (mbxor.py) to determine the key length of the key. 
+          These are the results when I run my python script:</p>
+          <div class="center"><img src="images/mbxor_script_results.png"></div>
+          <p>The results looked correct because 5 and multiples of 5 gave me the lowest number of unmatching bits per
+          byte (with 5 being the most likely key length according to my python script). I verified my finding
+          with xortool, and ran the following command: xortool -x ciphertext2.txt. Xortool also determined
+          that the most likely key length was 5 bytes. After this, I brute-forced all possible values for a 5 byte
+          key (using xortool because it was tedious to code it in python) and determined which output gave
+          me the flag. I used the following command in xortool to brute force all possible values of a 5 byte
+          key and generate its output: xortool -x -b ciphertext2.txt. Then I used the python script find.py to
+          find the file that had the string “flag” somewhere in it.</p>
+      </div>
+    </div>
+  </section>
+<script>
+  
+  function showMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "0px";
+  }
+  
+  function hideMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "-200px";
+  }
+  
+
+</script>
+</body>
+</html>

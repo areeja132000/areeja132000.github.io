@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RSA2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:black;">
+  <section class="header2">
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="ctf_index.html">CTF WALKTHROUGHS</a></li>
+            <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+      </div>
+      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="container">
+      <div class="writeup">
+        <h1>Common modulus attack - rsa2</h1>
+        <p>The associated script, ciphertext, and PDF of the solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-12">Script, ciphertext, and PDF</a>
+        <p>For this challenge, we can see that m and n are the same and e is different for both messages. Thus, we can do a common modulus attack. 
+          Consider the following:</p>
+        <p>Modulus arithmetic rules:<br>
+          1. (A * B) mod C = (A mod C * B mod C) mod C<br>
+          2. (A ^ B) mod C = ((A mod C) ^ B) mod C</p>
+        <p>The following algorithm can be manipulated to show that it will be useful when trying to get the flag:<br>
+          ((c1^u mod n)*(c2^v mod n)) mod n<br>
+          = (((m^e1 mod n)^u mod n)*((m^e2 mod n)^v mod n)) mod n.<br>                       
+          = ((m^(e1*u) mod n)*(m^(e2*v) mod n)) mod n.  by 2.<br>
+          = m^(e1*u+e2*v) mod n.                        by 1.<br>
+        </p>
+        <p>Consider Bézout's identity: ax + by = gcd(a,b). When a and b are coprime (gcd(a,b) = 1), x is the modular multiplicative inverse of a modulo b. This can be calculated with gmpy2.invert(a,b). Therefore, u can be calculated through:<br>
+        u = gmpy2.invert(e1, e2)<br>
+        Now, from (e1*u)+(e2*v) = 1, we can rearrange to solve for v:<br>
+        v = (1 - (e1*u))/e2</p>
+        <p>Now, we have u and v. Thus, we just need to plug them into the equation m = ((c1^u mod n)*(c2^v mod n)) mod n to get back m. After that, we can convert the integer m back to ascii and get the flag. These are the results when I run my python script:</p>
+        <div class="center"><img src="images/rsa2_script_results.png"></div>  
+        <p>Thus, this challenge is solved</p>
+      </div>
+    </div>
+  </section>
+<script>
+  
+  function showMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "0px";
+  }
+  
+  function hideMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "-200px";
+  }
+  
+
+</script>
+</body>
+</html>

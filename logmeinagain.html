@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LOG ME IN AGAIN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:black;">
+  <section class="header2">
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="ctf_index.html">CTF WALKTHROUGHS</a></li>
+            <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+      </div>
+      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="container">
+      <div class="writeup">
+        <h1>Blind SQL Injection - log me in again</h1>
+        <p>The associated solution and script can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-9">PDF of solution</a>
+        <p></p>
+        <p>For this challenge, I first explored the website a little. The website looked like this:</p>
+        <div class="center"><img src="images/logmeinagain_website.png"></div>
+        <p>In this challenge, I was supposed to find a flag in a database server. To do this, I followed the following steps:</p>
+        <p>1.	First, I leaked database names through information_schema.</p>
+        <p>I found that the two databases in the database server were ‘information_schema’ and ‘logmein’. To leak the database names, I programmed a python script to send the following SQL query to the website (please refer to logMeInAgain.py for more details):</p>
+        <p>string = "admin' UNION SELECT IF(SUBSTR((SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'logmein' AND TABLE_TYPE = 'BASE TABLE' LIMIT 1 OFFSET 0), {}, 1) = '{}' , SLEEP(5), 0), 2, 3; -- ".format(i, characters[index])</p>
+        <p>This code leaks the ith letter of the database’s name. The offset is the xth database name that the programmer is trying to leak (starting at offset 0). The following 2 images show the script leaking database names:</p>
+        <div class="center"><img src="images/logmeinagain_database_name_leak.png"></div>
+        <div class="center"><img src="images/logmeinagain_database_name_leak2.png"></div>
+        <p>This part of the code is used for all steps of the exploit, so I will explain it here:</p>
+        <p>a. First, I make a list (please call this list ‘characters’) of all possible characters that could be in the string I am trying to leak (in this case, that is the database’s name). Then, I inspect the first character of the string that I am trying to leak (which would be what SUBSTR() returns) and iterate through my list ‘characters’ (please assume that the character I am currently at is characters[index]). If the first letter of the string I am trying to leak matches characters[index], the script sleeps for 5 seconds. If the script sleeps, I have found a letter of the string I am trying to leak and can move on to the next letter (by adding 1 to i) and try to leak it. If the script does not sleep, I keep on iterating through ‘characters’ (by adding 1 to index) to find a character that matches the current letter of the string that I am trying to leak.</p>
+        <p>2.	Next, I leaked table names through information_schema.</p>
+        <p>I found that the two tables in ‘logmein’ were ‘secrets’ and ‘users’. To leak the table names, I programmed my script to send the following SQL query to the website:</p>
+        <p>string = "admin' UNION SELECT IF(SUBSTR((SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'logmein' AND TABLE_TYPE = 'BASE TABLE' LIMIT 1 OFFSET x), {}, 1) = '{}' , SLEEP(5), 0), 2, 3; -- ".format(i, characters[index])</p>
+        <p>This code leaks the ith letter of the table’s name. The offset is the xth table that the programmer is trying to leak (starting at offset 0). The logic for why this code works was explained in section (a.). The following 2 images show the script leaking table names:</p>
+        <div class="center"><img src="images/logmeinagain_table_name_leak.png"></div>
+        <div class="center"><img src="images/logmeinagain_table_name_leak2.png"></div>
+        <p>3.	After that, I leaked column names of the table ‘secrets’ through information_schema</p>
+        <p>I found that the two columns in ‘secrets’ were ‘ID’ and ‘value’. To leak the column names, I programmed my script to send the following SQL query to the website:</p>
+        <p>string = "admin' UNION SELECT IF(SUBSTR((SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'logmein' AND TABLE_NAME = 'secrets' LIMIT 1 OFFSET x), {}, 1) = '{}' , SLEEP(5), 0), 2, 3; -- ".format(i, characters[index])</p>
+        <p>This code leaks the ith letter of the column’s name. The offset is the xth column that the programmer is trying to leak (starting at offset 0). The logic for why this code works was explained in section (a.). The following 2 images show the script leaking column names:</p>
+        <div class="center"><img src="images/logmeinagain_column_name_leak.png"></div>
+        <div class="center"><img src="images/logmeinagain_column_name_leak2.png"></div>
+        <p>4.	Finally, I leaked the flag by getting the string in the ‘value’ column of the table ‘secrets’</p>
+        <p>To leak the flag, I programmed my script to send the following SQL query to the website:</p>
+        <p>string = "admin' UNION SELECT IF(SUBSTR((SELECT VALUE FROM secrets LIMIT 1 OFFSET 0), {}, 1) = BINARY '{}' , SLEEP(5), 0), 2, 3; -- ".format(i, characters[index])</p>
+        <p>This code leaks the ith letter of the flag’s name. The logic for why this code works was explained in section (a.). The following image shows the script leaking the flag:</p>
+        <div class="center"><img src="images/logmeinagain_flag_leak.png"></div>
+      </div>
+    </div>
+  </section>
+<script>
+  
+  function showMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "0px";
+  }
+  
+  function hideMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "-200px";
+  }
+  
+
+</script>
+</body>
+</html>
