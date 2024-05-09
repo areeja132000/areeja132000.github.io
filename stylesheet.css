@@ -2,12 +2,14 @@
   margin: 0;
   padding: 0;
   font-family: 'Red Hat Mono', monospace;
+  overflow-x: hidden;
 }
 
 .header{
   min-height: 100vh;
   width: 100%;
   background-image: linear-gradient(rgba(9,25,51,0),rgba(255,255,255,0)),url(images/background.jpg);
+  background-color: black;
   background-position: center;
   background-size: cover;
   position: relative; 
@@ -172,6 +174,7 @@ nav .fa-solid{
 
 .about_us p{
   color: white;
+  margin: 10px;
 }
 
 .gauss_calc p{
@@ -186,13 +189,7 @@ nav .fa-solid{
   color: white;
 }
 
-.wrapper{
-  margin: 10px;
-}
 .icon1{
-  display: inline-block;
-}
-.container_contact{
   display: inline-block;
 }
 
@@ -250,13 +247,11 @@ input[type="number"] {
 
 .calc{
   margin: 10px;
-  padding: 20px;
 }
 
 .b{
   width: 5%;
   margin: 10px;
-  padding: 20px;
 }
 
 .footer {
