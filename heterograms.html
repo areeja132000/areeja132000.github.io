@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HETEROGRAMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:black;">
+  <section class="header2">
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="ctf_index.html">CTF WALKTHROUGHS</a></li>
+            <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+      </div>
+      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="container">
+      <div class="writeup">
+        <h1>Reverse engineering - heterograms</h1>
+        <p>The binary and a PDF of the solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-3">Binary and PDF of solution</a>
+        <p></p>
+        <p>I completed this challenge with a combination of static and dynamic analysis. I used static analysis to first understand what the program was asking for and then used dynamic analysis to see where my input was failing and correct my input. The goal of this program is to make globalstate == 7, which will then return 1 and give you the flag. Globalstate starts at 0, and each time you send a successful packet (that is not for clearing out variables), globalstate increases by 1.</p>
+        <p>Packets can be separated into 2 types: packets that clear the array_buff and packets that set the array_buff.
+        All packets (both packets that clear the array_buff and packets that set the array_buff) have the following contents:
+        (*The first 2 bytes are fixed, but other values can be sent in different orders as long as values follow indications)</p>
+        <p>All packets (both packets that clear the array_buff and packets that set the array_buff) have the following contents:</p>
+        <p>(*The first 2 bytes are fixed, but other values can be sent in different orders as long as values follow indications)</p> 
+
+        <div id="heterograms_table" class="heterograms_table">
+          <table>
+            <tr>
+              <th style="padding: 10px;"> Byte</th>
+              <th style="padding: 10px;">Content</th>
+            </tr>
+            <tr>
+              <td style="padding: 10px;">0</td>
+              <td style="padding: 10px;">Length of payload (excluding this value)</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px;">1</td>
+              <td style="padding: 10px;">Checksum (excluding this value)</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px;">2</td>
+              <td style="padding: 10px;">Indication that following byte is the operation done on the array (Value = \x02)</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px;">3</td>
+              <td style="padding: 10px;">Operation on array (0 for checking, 2 for erasing)</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px;">4</td>
+              <td style="padding: 10px;">Indication that following byte is the value of globalstate from the user (Value = \x00)</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px;">5</td>
+              <td style="padding: 10px;">globalstate</td>
+            </tr>
+          </table>
+        </div>
+
+        <p>Packets that set the array_buff have a payload section with the following format:</p>
+
+        <div id="heterograms_table" class="heterograms_table">
+          <table>
+            <tr>
+              <th style="padding: 10px;">Byte</th>
+              <th style="padding: 10px;">Content</th>
+            </tr>
+            <tr>
+              <td style="padding: 10px;">6</td>
+              <td style="padding: 10px;">Indication that following byte marks the start of payload (Value = \x01)</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px;">7</td>
+              <td style="padding: 10px;">Length of payload</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px;">8 - end of payload</td>
+              <td style="padding: 10px;">payload</td>
+            </tr>
+          </table>
+        </div>
+
+        <p>You can figure out the payload of a successful packet by analyzing strings in the binary. There are 7 strings to be analyzed in this program. This program wants the user to send packets that will set an array_buff for every string. Consider the mapping a->0, b->1, c->2, d->3,…, z->25. array_buff[x] needs to be set to 1 if the letter corresponding to x in the mapping is present in the string. The user constructs this array_buff by indicating at which indices the array_buff should be set to 1 through the payload.</p>
+        <p>After setting array_buff, the user also needs to be able to reset it so that it can be set again, which can be done by sending a packet without a payload that sticks to the conventions outlined in the tables above.</p>
+        <p>For each string successfully analyzed, globalstate increases by 1 and eventually hits 7, causing the program to return the flag.</p>
+      </div>
+    </div>
+  </section>
+<script>
+  
+  function showMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "0px";
+  }
+  
+  function hideMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "-200px";
+  }
+  
+
+</script>
+</body>
+</html>

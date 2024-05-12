@@ -225,7 +225,7 @@ nav .fa-solid{
   display: none;
 }
 
-table, th, td {
+.calc table, .calc th, .calc td {
   border: 1px solid black;
   border-collapse: collapse;
   margin-left: auto; 
@@ -233,6 +233,23 @@ table, th, td {
   margin-top: 15px;
   margin-bottom: 15px;
   width: 17%;
+  text-align: center;
+}
+
+.b table, .b th, .b td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-left: auto; 
+  margin-right: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 17%;
+  text-align: center;
+}
+
+.heterograms_table table, .heterograms_table th, .heterograms_table td{
+  border: 1px solid white;
+  border-collapse: collapse;
   text-align: center;
 }
 
