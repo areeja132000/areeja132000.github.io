@@ -26,8 +26,8 @@
     <div class="container">
       <div class="writeup">
         <h1>Simple reverse Engineering - recurse</h1>
-        <p>The associated binary and solution can be found in this repository:</p>
-        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-1">binary and writeup</a>
+        <p>The binary, script for exploitation, and a PDF of the solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-1">Binary, script for exploitation, and PDF of solution</a>
         <p></p>
         <p>I completed this challenge using a combination of dynamic analysis and python. Recurse only returns 1 if num1 and num2 sum to 116369 and num3 is 16 (please see python script). Through dynamic analysis, I saw that the numbers (when testing numbers going up in value, starting with 1, 1) approached 116369 quickly when going through the recurse and absolutely not useless functions. Therefore, I translated the entire c code from ghidra into python and ran a python script that did the same thing as the program being analyzed. I looped through all possible values from 1 to 100 for both values and found the answer. In other words, I used brute force to obtain the answer.</p>
         <div class="center"><img src="images/recurse.png"></div>

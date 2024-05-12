@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>POSTAGE</title>
+  <title>INSPECTOR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
@@ -25,15 +25,11 @@
     </nav>
     <div class="container">
       <div class="writeup">
-        <h1>Simple reverse engineering - postage</h1>
+        <h1>ROP gadgets theory - inspector</h1>
         <p>The binary, script for exploitation, and a PDF of the solution can be found in this repository:</p>
-        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-1">Binary, script for exploitation, and PDF of solution</a>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-6">Binary, script for exploitation, and PDF of solution</a>
         <p></p>
-        <p>I completed this challenge by using checksec and analyzing the disassembly output. It can be noted with checksec that PIE is off.</p>
-        <div class="center"><img src="images/postage_checksec.png" class="small"></div>
-        <p>This means that the program runs using the same location in virtual memory every time. This is relevant because this program gives the student the flag if they can give them a number such that if it is turned into a pointer and dereferenced, the program will get back 0xd000dfaceee. So, I found the part of the memory that stores 0xd000dfaceee (401963) and converted that hex address to decimal to get the answer (4200803). Since the program runs using the same virtual addresses every time, this number should work for every run. </p>
-        <div class="center"><img src="images/postage.png" class="small"></div>
-        <section class="footer"></section>
+        <p>First, I ran checksec and determined that canaries and PIE were disabled. This means we can write past the buffer and jump to function addresses that will remain unchanging. I wrote garbage into the buffer and set the return address above rbp to be the address of “pop rdi, ret”. Then, I wrote the next value to be the value I wanted to set rdi to. I repeated this for the registers rsi, rax, and rdx. This works because the function returns to the section of code where “pop register, ret” is occurring and since the next value on the stack is the value we want to put on the register, that gets popped and set as the value of the register. Then, the program returns to the next value in the stack, which causes the program to start executing from “pop next_register, ret”. Rinse and repeat. Using this, I set up the registers for an execve call and then made the program return to a part of the binary that is executing syscall. Thus, I was able to obtain the flag.</p>
       </div>
     </div>
   </section>

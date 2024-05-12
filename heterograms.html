@@ -26,8 +26,8 @@
     <div class="container">
       <div class="writeup">
         <h1>Reverse engineering - heterograms</h1>
-        <p>The binary and a PDF of the solution can be found in this repository:</p>
-        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-3">Binary and PDF of solution</a>
+        <p>The binary, script for exploitation, and a PDF of the solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-3">Binary, script for exploitation, and PDF of solution</a>
         <p></p>
         <p>I completed this challenge with a combination of static and dynamic analysis. I used static analysis to first understand what the program was asking for and then used dynamic analysis to see where my input was failing and correct my input. The goal of this program is to make globalstate == 7, which will then return 1 and give you the flag. Globalstate starts at 0, and each time you send a successful packet (that is not for clearing out variables), globalstate increases by 1.</p>
         <p>Packets can be separated into 2 types: packets that clear the array_buff and packets that set the array_buff.

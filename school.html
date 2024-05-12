@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>POSTAGE</title>
+  <title>SCHOOL</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
@@ -25,15 +25,11 @@
     </nav>
     <div class="container">
       <div class="writeup">
-        <h1>Simple reverse engineering - postage</h1>
+        <h1>Buffer overflow and stack execution - school</h1>
         <p>The binary, script for exploitation, and a PDF of the solution can be found in this repository:</p>
-        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-1">Binary, script for exploitation, and PDF of solution</a>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-5">Binary, script for exploitation, and PDF of solution</a>
         <p></p>
-        <p>I completed this challenge by using checksec and analyzing the disassembly output. It can be noted with checksec that PIE is off.</p>
-        <div class="center"><img src="images/postage_checksec.png" class="small"></div>
-        <p>This means that the program runs using the same location in virtual memory every time. This is relevant because this program gives the student the flag if they can give them a number such that if it is turned into a pointer and dereferenced, the program will get back 0xd000dfaceee. So, I found the part of the memory that stores 0xd000dfaceee (401963) and converted that hex address to decimal to get the answer (4200803). Since the program runs using the same virtual addresses every time, this number should work for every run. </p>
-        <div class="center"><img src="images/postage.png" class="small"></div>
-        <section class="footer"></section>
+        <p>I solved this challenge using a combination of static and dynamic analysis. First, I ran checksec and determined that NX is disabled, which means that instructions on the stack can be executed. Furthermore, stack canary is disabled, which means that we could try to use a buffer overflow attack. Also, we know the address of the start of the stack because the program prints it out for us. Now, we can write assembly that will give us the shell by running execve with the following arguments: a pointer to "/bin/sh", null (0), and null (0). We can turn this assembly into machine code and put it on the stack so that we can execute it. This will take up 37 bytes, and the remaining 3 bytes can be filled with '\x00's. We have overwritten the stack and the saved rbp at this point. Now, we can overwrite the return address to point to the start of the stack. This will cause the program to go to the start of the stack and execute our shellcode, giving us the shell. Thus, this challenge is solved.</p>
       </div>
     </div>
   </section>

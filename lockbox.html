@@ -26,8 +26,8 @@
     <div class="container">
       <div class="writeup">
         <h1>Buffer Overflow + Reverse Engineering - lockbox</h1>
-        <p>The associated binary and solution can be found in this repository:</p>
-        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-4">binary and writeup</a>
+        <p>The binary, script for exploitation, and a PDF of the solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-4">Binary, script for exploitation, and PDF of solution</a>
         <p></p>
         <p>I solved this challenge using static and dynamic analysis. For my solution to be effective, it's imperative that no canary is detected, as canaries would stop buffer overflow attacks. Furthermore, it is necessary that PIE (Position Independent Executable) is disabled, as an enabled PIE ensures that functions are not loaded into the same addresses each time, making it difficult to jump to different functions with a buffer overflow. I checked both requirements with checksec.</p>
         <div class="center"><img src="images/lockbox_checksec.png" class="small"></div>
