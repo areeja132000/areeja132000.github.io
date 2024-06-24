@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CBC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://kit.fontawesome.com/3273cb5b36.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:black;">
+  <section class="header2">
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="ctf_index.html">CTF WALKTHROUGHS</a></li>
+            <li><a href="pentest.html">PENETRATION TESTING</a></li>
+            <li><a href="netsec.html">NETWORK ADMINISTRATION & NETWORK SECURITY</a></li>
+            <li><a href="row_pivot.html">GAUSSIAN ELIMINATION ROW PIVOTING</a></li>
+            <li><a href="contact.html">CONTACT & GITHUB LINK</a></li>
+          </ul>
+      </div>
+      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="container">
+      <div class="writeup">
+        <h1>CBC padding oracle attack - cbc</h1>
+        <p>The associated script, ciphertext, and PDF of the solution can be found in this repository:</p>
+        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-12">Script, ciphertext, and PDF</a>
+        <p>For this challenge, we can see that this is a CBC padding oracle attack. Please note that according to PKCS#7, padding is done like this:</p>
+        <p>n = # of bytes to be padded</p>
+        <p>Block of plaintext to be encrypted = “{some_plaintext}\xn\xn…\xn” (i.e, \xn is repeated n times)</p>
+        <p>The length of the block in this case is 16 bytes. Thus, if the whole block was padded, the block of plaintext to be encrypted would be:</p>
+        <p>\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10 (i.e., \x10 16 times)</p>
+        <p>Also, there must be padding at the end of the plaintext for the encryption algorithm to recognize it as valid plaintext. Thus, if the bytes of the plaintext without padding are an exact multiple of 16, the last 16-bytes block of plaintext should be padding.</p>
+        <p>Furthermore, there is something called a padding oracle, which, when given a ciphertext, tells the user whether its decrypted plaintext has valid padding or not.</p>
+        <p>The decryption algorithm works in the following way:</p>
+        <div class="center"><img src="images/cbc.png"></div> 
+        <p>Now, let’s say that c0 – c15 were the hex bytes of the second last block of ciphertext. Also, let’s say c16 – c31 were the hex bytes of the last block of ciphertext.</p>
+        <p>We can use the oracle to figure out i16 – i31 (i.e., the output after sending the last block of ciphertext through decryption (note: this is before XOR’ing it with the previous ciphertext)). The following math explains why this works:</p>
+        <p>Consider we want to solve for i31:</p>
+        <p>We know that if we can force the last byte of the plaintext to be 0x1, the oracle will give us a “yes” response. So, let’s try to force the last byte of the plaintext to be 0x1 by iterating through all values of a byte for the last byte of the second last block (let’s call this changed value c15’) and sending these messages to the oracle. Whatever message we get a yes for will mean we have forced the last byte of plaintext to be 0x1.</p>
+        <p>Consider the following math:</p>
+        <p>0x1 = c15’ ^ i31</p>
+        <p>Therefore, we can figure out i31 through the following:</p>
+        <p>i31 = 0x1 ^ c15’</p>
+        <p>Now, to solve for i30, we can do something similar. We can force the last 2 bytes of the plaintext to be 0x2. We already know what we need c15’ to be to get the last byte to be 0x2:</p>
+        <p>c15’ = i31 ^ 0x2</p>
+        <p>We can figure out what c14’ needs to be to get the second last byte to be 0x2 by iterating through all values of a byte for c14’ and sending these messages to the oracle. Whatever message we get a yes for will mean we have forced the second last byte of plaintext to be 0x2. Then, the same as before, we can solve for i30:</p>
+        <p>i30 = 0x2 ^ c14’</p>
+        <p>Now, if we rinse and repeat for every byte in the ciphertext, we can get the intermediate bytes for the entire ciphertext. The intermediate bytes of block n XOR’ed with the ciphertext bytes of block n-1 give us the plaintext for block n. We can repeat this for every block to get the plaintext and therefore, the flag. My python script cbc.py leaks the actual intermediate bytes, while my python script cbc_xor.py XOR’s the intermediate bytes with the ciphertext to get the plaintext. Thus, this challenge is solved.</p>
+      </div>
+    </div>
+  </section>
+<script>
+  
+  function showMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "0px";
+  }
+  
+  function hideMenu(){
+    var navLinks = document.getElementById("navLinks");
+    navLinks.style.right = "-200px";
+  }
+  
+
+</script>
+</body>
+</html>
