@@ -81,8 +81,9 @@ nav{
   margin-top: 20px;
   margin-left: 400px;
   width: 50%;
-  overflow-x: visible;
   padding-bottom: 40px;
+  display: inline-block;
+  word-break: break-word;
 }
 
 .walkthroughs h1{
