@@ -227,10 +227,12 @@ nav .fa-solid{
 
 .results{
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   display: none;
 }
 
-.calc table, .calc th, .calc td {
+table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
   margin-left: auto; 
@@ -241,21 +243,27 @@ nav .fa-solid{
   text-align: center;
 }
 
-.b table, .b th, .b td {
-  border: 1px solid black;
+.heterograms_table table{
+  border: 1px solid white;
   border-collapse: collapse;
   margin-left: auto; 
   margin-right: auto;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  width: 17%;
+  width: 100%;
   text-align: center;
 }
 
-.heterograms_table table, .heterograms_table th, .heterograms_table td{
+.heterograms_table th {
   border: 1px solid white;
   border-collapse: collapse;
   text-align: center;
+  padding: 10px;
+}
+
+.heterograms_table td{
+  border: 1px solid white;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 10px;
 }
 
 input[type="number"] {

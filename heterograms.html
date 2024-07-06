@@ -41,32 +41,32 @@
         <div id="heterograms_table" class="heterograms_table">
           <table>
             <tr>
-              <th style="padding: 10px;"> Byte</th>
-              <th style="padding: 10px;">Content</th>
+              <th style="width:10%;">Byte</th>
+              <th style="width:90%;">Content</th>
             </tr>
             <tr>
-              <td style="padding: 10px;">0</td>
-              <td style="padding: 10px;">Length of payload (excluding this value)</td>
+              <td>0</td>
+              <td>Length of payload (excluding this value)</td>
             </tr>
             <tr>
-              <td style="padding: 10px;">1</td>
-              <td style="padding: 10px;">Checksum (excluding this value)</td>
+              <td>1</td>
+              <td>Checksum (excluding this value)</td>
             </tr>
             <tr>
-              <td style="padding: 10px;">2</td>
-              <td style="padding: 10px;">Indication that following byte is the operation done on the array (Value = \x02)</td>
+              <td>2</td>
+              <td>Indication that following byte is the operation done on the array (Value = \x02)</td>
             </tr>
             <tr>
-              <td style="padding: 10px;">3</td>
-              <td style="padding: 10px;">Operation on array (0 for checking, 2 for erasing)</td>
+              <td>3</td>
+              <td>Operation on array (0 for checking, 2 for erasing)</td>
             </tr>
             <tr>
-              <td style="padding: 10px;">4</td>
-              <td style="padding: 10px;">Indication that following byte is the value of globalstate from the user (Value = \x00)</td>
+              <td>4</td>
+              <td>Indication that following byte is the value of globalstate from the user (Value = \x00)</td>
             </tr>
             <tr>
-              <td style="padding: 10px;">5</td>
-              <td style="padding: 10px;">globalstate</td>
+              <td>5</td>
+              <td>globalstate</td>
             </tr>
           </table>
         </div>
@@ -76,20 +76,20 @@
         <div id="heterograms_table" class="heterograms_table">
           <table>
             <tr>
-              <th style="padding: 10px;">Byte</th>
-              <th style="padding: 10px;">Content</th>
+              <th style="width:10%;">Byte</th>
+              <th style="width:90%;">Content</th>
             </tr>
             <tr>
-              <td style="padding: 10px;">6</td>
-              <td style="padding: 10px;">Indication that following byte marks the start of payload (Value = \x01)</td>
+              <td>6</td>
+              <td>Indication that following byte marks the start of payload (Value = \x01)</td>
             </tr>
             <tr>
-              <td style="padding: 10px;">7</td>
-              <td style="padding: 10px;">Length of payload</td>
+              <td>7</td>
+              <td>Length of payload</td>
             </tr>
             <tr>
-              <td style="padding: 10px;">8 - end of payload</td>
-              <td style="padding: 10px;">payload</td>
+              <td>8 - end of payload</td>
+              <td>payload</td>
             </tr>
           </table>
         </div>
