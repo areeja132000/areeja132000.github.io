@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>INCLUSION</title>
+  <title>DIGITAL FORENSICS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
@@ -28,17 +28,12 @@
     </nav>
     <div class="container">
       <div class="writeup">
-        <h1>PHP file inclusion vulnerability - Inclusion</h1>
-        <p>A PDF of the solution can be found in this repository:</p>
-        <a href="https://github.com/areeja132000/offensive-security/tree/main/week-10">PDF of solution</a>
+        <h1>Digital Forensics projects</h1>
+        <p>Script that parses SQLite browser history database:</p>
+        <a href="https://github.com/areeja132000/digital-forensics/tree/main/module-8">SQLite database file and script</a>
+        <p>Script that parses malware log file:</p>
+        <a href="https://github.com/areeja132000/digital-forensics/tree/main/module-9">Log file and script</a>
         <p></p>
-        <p>For this challenge, I used Burp Suite to try to exploit a PHP file inclusion vulnerability. If we look around the website, on the flag page, we can see "The flag is just above this line (in the source code at least)!". </p>
-        <div class="center"><img src="images/inclusion_website.png"></div>
-        <p>Thus, we can conclude that we need to leak some source code. Furthermore, from the name of this challenge, we can conclude that the source code contains a PHP file inclusion vulnerability. When looking at burp suite, we can also see that there is a “page=flag”.</p>
-        <div class="center"><img src="images/inclusion_observation.png"></div>
-        <p>Include supports PHP stream filter URLs. Thus, we can change “page=flag” to “page=php://filter/convert.base64-encode/resource=flag” to get a base64 encoding of the flag.</p>
-        <div class="center"><img src="images/inclusion_leak.png"></div>
-        <p>Then, once we decode the outputted string, we get the flag (in this case, it is “flag{php_1nclud3_1s_s0_w31rd}”). Thus, the challenge is solved.</p>
       </div>
     </div>
   </section>
